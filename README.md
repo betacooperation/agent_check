@@ -20,21 +20,20 @@ Then the following needs to be added to your config:
 
 ```elixir
   config :agent_check,
-         port: System.get_env("AGENT_CHECK_PORT") || 6666,
+         port: System.get_env("AGENT_CHECK_PORT") || "6666",
          capacity_callback: &YourApplication.calculate_capacity/0,
          maint_callback: &YourApplication.close_all_open_connections/0
 ```
 
 The capacity callback *must* return a string between 1 and 100. Both callbacks are optional. 
-Next you need to configure Haproxy to check for your agent.
 
+Next you need to configure Haproxy to check for your agent.
 ```
 backend your_backend_web
   mode tcp
   balance roundrobin
   server websrv1 192.168.1.101:443 weight 255 check agent-check agent-port 6666 agent-addr 192.168.1.101 agent-send state\n
   server websrv2 192.168.1.102:443 weight 255 check agent-check agent-port 6666 agent-addr 192.168.1.102 agent-send state\n
-  server websrv3 192.168.1.103:443 weight 255 check agent-check agent-port 6666 agent-addr 192.168.1.103 agent-send state\n
 ```
 
 ## Usage
