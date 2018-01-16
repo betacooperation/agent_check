@@ -11,9 +11,16 @@ by adding `agent_check` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:agent_check, "~> 0.1.0"}
+    {:agent_check, "~> 0.2.0"}
   ]
 end
+
+  def application do
+    [
+      extra_applications: [:logger, :agent_check],
+      mod: {Your.Application, []}
+    ]
+  end
 ```
 
 Then the following needs to be added to your config:
@@ -21,8 +28,8 @@ Then the following needs to be added to your config:
 ```elixir
   config :agent_check,
          port: System.get_env("AGENT_CHECK_PORT") || "6666",
-         capacity_callback: &YourApplication.calculate_capacity/0,
-         maint_callback: &YourApplication.close_all_open_connections/0
+         capacity_callback: &Your.Application.calculate_capacity/0,
+         maint_callback: &Your.Application.close_all_open_connections/0
 ```
 
 The capacity callback *must* return a string between 1 and 100. Both callbacks are optional. 

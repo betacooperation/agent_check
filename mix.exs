@@ -4,7 +4,7 @@ defmodule AgentCheck.Mixfile do
   def project do
     [
       app: :agent_check,
-      version: "0.1.0",
+      version: "0.2.0",
       elixir: "~> 1.5",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
@@ -37,7 +37,7 @@ defmodule AgentCheck.Mixfile do
   defp package do
     [
       files: ["lib", "mix.exs", "README*", "LICENSE*"],
-      maintainers: ["Bart ten Brinke"],
+      maintainers: ["Bart ten Brinke", "Beta Corp"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/betacooperation/agent_check"}
     ]
