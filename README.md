@@ -1,6 +1,8 @@
 # Agent Check
 HAProxy Agent Check protocol implementation for Elixir/Phoenix apps. Allows for easy rolling restarts and dynamic backpressure to your loadbalancer.
 
+![screencast](https://github.com/betacooperation/agent_check/raw/master/doc/screencast.gif "Screencast")
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
