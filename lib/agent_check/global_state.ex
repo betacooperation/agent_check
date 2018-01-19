@@ -15,7 +15,8 @@ defmodule AgentCheck.GlobalState do
 
   def start_link(capacity_callback, maint_callback) do
     result = Agent.start_link(fn -> %AgentCheck.GlobalState.State{capacity_callback: capacity_callback, maint_callback: maint_callback} end, name: __MODULE__)
-    update_capacity_loop()
+    :timer.apply_interval(10000, AgentCheck.GlobalState, :update_capacity_loop, [])
+    
     result
   end
 

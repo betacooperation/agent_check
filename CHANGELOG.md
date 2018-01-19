@@ -1,4 +1,7 @@
 # Changelog
+## v0.2.1
+
+* Do not update capacity during start up phase.
 
 ## v0.2.0
 
