@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.4
+
+* Maint hook is called after 10 seconds
+
 ## v0.2.3
 
 * Allow integers as config
