@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.5
+
+* Maint hook is now called directly
+
 ## v0.2.4
 
 * Maint hook is called after 10 seconds

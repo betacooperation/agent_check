@@ -47,8 +47,7 @@ defmodule AgentCheck.GlobalState do
   def maint() do
     case get_key(:maint_callback) do
       nil -> nil
-      {module, method} ->
-        :timer.apply_interval(10000, module, method, [])
+      {module, method} -> apply(module, method, [])
     end
 
     set_state("maint")
