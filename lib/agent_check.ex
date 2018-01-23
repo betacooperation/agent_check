@@ -10,11 +10,17 @@ defmodule AgentCheck do
   @doc """
   Starts accepting connections on the given `port`.
   """
-  def accept(port) do
+  def accept(port) when is_integer(port) do
     {:ok, socket} = :gen_tcp.listen(port, [:binary, packet: :line, active: false, reuseaddr: true])
     Logger.info "Agent Check - accepting connections on port #{port}"
 
     loop_acceptor(socket)
+  end
+  def accept(port) when is_binary(port) do
+    port
+    |> Integer.parse()
+    |> elem(0)
+    |> accept
   end
 
   @doc """

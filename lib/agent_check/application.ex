@@ -6,7 +6,7 @@ defmodule AgentCheck.Application do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
-    {port, _remain} = Application.get_env(:agent_check, :port) |> Integer.parse
+    port = Application.get_env(:agent_check, :port)
     capacity_callback = Application.get_env(:agent_check, :capacity_callback)
     maint_callback = Application.get_env(:agent_check, :maint_callback)
 

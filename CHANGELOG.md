@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.3
+
+* Allow integers as config
+
 ## v0.2.2
 
 * Use Module method tuple instead of functionpointer

@@ -11,7 +11,7 @@ by adding `agent_check` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:agent_check, "~> 0.2.0"}
+    {:agent_check, "~> 0.2.3"}
   ]
 end
 
@@ -27,7 +27,7 @@ Then the following needs to be added to your config:
 
 ```elixir
   config :agent_check,
-         port: System.get_env("AGENT_CHECK_PORT") || "6666",
+         port: System.get_env("AGENT_CHECK_PORT") || 6666,
          capacity_callback: {Your.Application, :calculate_capacity},
          maint_callback: {Your.Application, :close_all_open_connections}
 ```

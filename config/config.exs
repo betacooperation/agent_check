@@ -3,7 +3,7 @@
 use Mix.Config
 
 config :agent_check,
-   port: System.get_env("AGENT_CHECK_PORT") || "6666",
+   port: System.get_env("AGENT_CHECK_PORT") || 6666,
    capacity_callback: nil,
    maint_callback: nil
 
