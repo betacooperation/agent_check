@@ -24,7 +24,7 @@ defmodule AgentCheck.GlobalState do
   def update_capacity_loop() do
     new_capacity = case get_key(:capacity_callback) do
       nil -> get_key(:capacity)
-      method -> apply(method, [])
+      {module, method} -> apply(module, method, [])
     end
 
     update_key(:capacity, new_capacity)
@@ -47,7 +47,7 @@ defmodule AgentCheck.GlobalState do
   def maint() do
     case get_key(:maint_callback) do
       nil -> nil
-      method -> apply(method, [])
+      {module, method} -> apply(module, method, [])
     end
 
     set_state("maint")

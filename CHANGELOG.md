@@ -1,4 +1,9 @@
 # Changelog
+
+## v0.2.2
+
+* Use Module method tuple instead of functionpointer
+
 ## v0.2.1
 
 * Do not update capacity during start up phase.

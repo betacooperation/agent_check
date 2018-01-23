@@ -28,8 +28,8 @@ Then the following needs to be added to your config:
 ```elixir
   config :agent_check,
          port: System.get_env("AGENT_CHECK_PORT") || "6666",
-         capacity_callback: &Your.Application.calculate_capacity/0,
-         maint_callback: &Your.Application.close_all_open_connections/0
+         capacity_callback: {Your.Application, :calculate_capacity},
+         maint_callback: {Your.Application, :close_all_open_connections}
 ```
 
 The capacity callback *must* return a string between 1 and 100. Both callbacks are optional. 
