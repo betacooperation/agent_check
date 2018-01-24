@@ -32,7 +32,7 @@ Then the following needs to be added to your config:
          maint_callback: {Your.Application, :close_all_open_connections}
 ```
 
-The capacity callback *must* return a string between 1 and 100. Both callbacks are optional. 
+The capacity callback *must* return a binary or integer between 1 and 100. Both callbacks are optional. 
 
 Next you need to configure Haproxy to check for your agent.
 ```
