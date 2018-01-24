@@ -4,10 +4,10 @@ defmodule AgentCheck.Mixfile do
   def project do
     [
       app: :agent_check,
-      version: "0.2.5",
+      version: "0.2.7",
       elixir: "~> 1.5",
-      build_embedded: Mix.env == :prod,
-      start_permanent: Mix.env == :prod,
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
       description: description(),
       package: package(),
       deps: deps()
@@ -25,7 +25,8 @@ defmodule AgentCheck.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.18", only: :dev}
+      {:ex_doc, "~> 0.18", only: :dev},
+      {:credo, "~> 0.9.0-rc1", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -34,6 +35,7 @@ defmodule AgentCheck.Mixfile do
     HAProxy Agent Check protocol implementation for Elixir/Phoenix apps. Allows for easy rolling restarts and dynamic backpressure to your HAProxy loadbalancer.
     """
   end
+
   defp package do
     [
       files: ["lib", "mix.exs", "README*", "LICENSE*"],

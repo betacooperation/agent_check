@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.1">
-    <title>AgentCheck.GlobalState – agent_check v0.2.5</title>
+    <title>AgentCheck.GlobalState – agent_check v0.2.7</title>
     <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
     
-    <script src="dist/sidebar_items-a393815a76.js"></script>
+    <script src="dist/sidebar_items-439dfa5485.js"></script>
     
     
     
@@ -31,7 +31,7 @@
         agent_check
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.2.5
+        v0.2.7
       </h2>
     </div>
     
@@ -65,11 +65,16 @@
 
 
       <h1>
-        <small class="visible-xs">agent_check v0.2.5</small>
+        <small class="visible-xs">agent_check v0.2.7</small>
         AgentCheck.GlobalState
         
       </h1>
 
+      
+        <section id="moduledoc">
+          <p>This Agent persists the gobal state of the appliction that is reported back to HaProxy.</p>
+
+        </section>
       
 
       
@@ -89,12 +94,6 @@
       <a href="#functions">Functions</a>
     </h2>
     <div class="summary-row">
-  <div class="summary-signature">
-    <a href="#default_capacity/0">default_capacity()</a>
-  </div>
-  
-</div>
-<div class="summary-row">
   <div class="summary-signature">
     <a href="#down/0">down()</a>
   </div>
@@ -132,6 +131,12 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#schedule_capacity_update/0">schedule_capacity_update()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#set_state/1">set_state(new_state)</a>
   </div>
   
@@ -144,6 +149,9 @@
     <a href="#start_link/2">start_link(capacity_callback, maint_callback)</a>
   </div>
   
+    <div class="summary-synopsis"><p>Start the agent and schedule the first capacity update</p>
+</div>
+  
 </div>
 <div class="summary-row">
   <div class="summary-signature">
@@ -155,6 +163,15 @@
   <div class="summary-signature">
     <a href="#up/0">up()</a>
   </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_capacity/1">update_capacity(new_capacity)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Update the capacity in the state struct</p>
+</div>
   
 </div>
 <div class="summary-row">
@@ -186,24 +203,7 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="default_capacity/0">
-  
-  
-  <div class="detail-header">
-    <a href="#default_capacity/0" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">default_capacity()</span>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="down/0">
+          <div class="detail" id="down/0">
   
   
   <div class="detail-header">
@@ -290,6 +290,23 @@
     
   </section>
 </div>
+<div class="detail" id="schedule_capacity_update/0">
+  
+  
+  <div class="detail-header">
+    <a href="#schedule_capacity_update/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">schedule_capacity_update()</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
 <div class="detail" id="set_state/1">
   
   
@@ -322,7 +339,8 @@
     
   </div>
   <section class="docstring">
-    
+    <p>Start the agent and schedule the first capacity update.</p>
+
   </section>
 </div>
 <div class="detail" id="stop/1">
@@ -357,6 +375,24 @@
   </div>
   <section class="docstring">
     
+  </section>
+</div>
+<div class="detail" id="update_capacity/1">
+  
+  
+  <div class="detail-header">
+    <a href="#update_capacity/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">update_capacity(new_capacity)</span>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Update the capacity in the state struct</p>
+
   </section>
 </div>
 <div class="detail" id="update_capacity_loop/0">

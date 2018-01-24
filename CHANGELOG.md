@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.2.7
+
+* Added more documentation.
+* Refactored handle_command case statement.
+
+## v0.2.6
+
+* Capacity function now accepts Integer and Strings
+* Ran Elixir 1.6 code formatter
+* Cleaned up Global state callbacks
+
 ## v0.2.5
 
 * Maint hook is now called directly

@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.1">
-    <title>AgentCheck – agent_check v0.2.5</title>
+    <title>AgentCheck – agent_check v0.2.7</title>
     <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
     
-    <script src="dist/sidebar_items-a393815a76.js"></script>
+    <script src="dist/sidebar_items-439dfa5485.js"></script>
     
     
     
@@ -31,7 +31,7 @@
         agent_check
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.2.5
+        v0.2.7
       </h2>
     </div>
     
@@ -65,7 +65,7 @@
 
 
       <h1>
-        <small class="visible-xs">agent_check v0.2.5</small>
+        <small class="visible-xs">agent_check v0.2.7</small>
         AgentCheck
         
       </h1>
@@ -115,8 +115,11 @@ Also see - https://cbonte.github.io/haproxy-dconv/1.8/configuration.html#5.2-age
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#handle_command/1">handle_command(command)</a>
+    <a href="#handle_command/1">handle_command(arg1)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Try to handle the received commandline</p>
+</div>
   
 </div>
 <div class="summary-row">
@@ -133,11 +136,17 @@ Also see - https://cbonte.github.io/haproxy-dconv/1.8/configuration.html#5.2-age
     <a href="#read_line/1">read_line(socket)</a>
   </div>
   
+    <div class="summary-synopsis"><p>Read a single line from the connected socket</p>
+</div>
+  
 </div>
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#serve/1">serve(socket)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Connect the socket and wait for a command</p>
+</div>
   
 </div>
 
@@ -204,13 +213,14 @@ Also see - https://cbonte.github.io/haproxy-dconv/1.8/configuration.html#5.2-age
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">handle_command(command)</span>
+    <span class="signature">handle_command(arg1)</span>
     
     
     
   </div>
   <section class="docstring">
-    
+    <p>Try to handle the received commandline.</p>
+
   </section>
 </div>
 <div class="detail" id="loop_acceptor/1">
@@ -245,7 +255,8 @@ Also see - https://cbonte.github.io/haproxy-dconv/1.8/configuration.html#5.2-age
     
   </div>
   <section class="docstring">
-    
+    <p>Read a single line from the connected socket.</p>
+
   </section>
 </div>
 <div class="detail" id="serve/1">
@@ -262,7 +273,8 @@ Also see - https://cbonte.github.io/haproxy-dconv/1.8/configuration.html#5.2-age
     
   </div>
   <section class="docstring">
-    
+    <p>Connect the socket and wait for a command.</p>
+
   </section>
 </div>
 

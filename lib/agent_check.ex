@@ -11,11 +11,14 @@ defmodule AgentCheck do
   Starts accepting connections on the given `port`.
   """
   def accept(port) when is_integer(port) do
-    {:ok, socket} = :gen_tcp.listen(port, [:binary, packet: :line, active: false, reuseaddr: true])
-    Logger.info "Agent Check - accepting connections on port #{port}"
+    {:ok, socket} =
+      :gen_tcp.listen(port, [:binary, packet: :line, active: false, reuseaddr: true])
+
+    Logger.info("Agent Check - accepting connections on port #{port}")
 
     loop_acceptor(socket)
   end
+
   def accept(port) when is_binary(port) do
     port
     |> Integer.parse()
@@ -34,30 +37,33 @@ defmodule AgentCheck do
     loop_acceptor(socket)
   end
 
+  @doc """
+  Connect the socket and wait for a command.
+  """
   def serve(socket) do
-    reply = socket
-            |> read_line()
-            |> String.trim("\n")
-            |> String.trim("\r")
-            |> handle_command
+    reply =
+      socket
+      |> read_line()
+      |> String.trim("\n")
+      |> String.trim("\r")
+      |> handle_command
 
     :gen_tcp.send(socket, "#{reply}\n")
     :gen_tcp.close(socket)
   end
 
-  def handle_command(command) do
-    case command do
-      "state" -> AgentCheck.GlobalState.get_stats |> format_haproxy_state # Used by Haproxy
-      "stats" -> inspect(AgentCheck.GlobalState.get_stats)
-      "ready" -> AgentCheck.GlobalState.ready
-      "maint" -> AgentCheck.GlobalState.maint
-      "stop" -> AgentCheck.GlobalState.stop("migration")
-      "drain" -> AgentCheck.GlobalState.drain
-      "up" -> AgentCheck.GlobalState.up
-      "down" -> AgentCheck.GlobalState.down
-      _ -> "Unknown command"
-    end
-  end
+  @doc """
+  Try to handle the received commandline.
+  """
+  def handle_command("state"), do: AgentCheck.GlobalState.get_stats() |> format_haproxy_state # Used by Haproxy
+  def handle_command("stats"), do: inspect(AgentCheck.GlobalState.get_stats())
+  def handle_command("ready"), do: AgentCheck.GlobalState.ready()
+  def handle_command("maint"), do: AgentCheck.GlobalState.maint()
+  def handle_command("stop"), do: AgentCheck.GlobalState.stop("reason")
+  def handle_command("drain"), do: AgentCheck.GlobalState.drain()
+  def handle_command("up"), do: AgentCheck.GlobalState.up()
+  def handle_command("down"), do: AgentCheck.GlobalState.down()
+  def handle_command(_), do: "Unknown command"
 
   @doc """
   Reformat the stats struct into a haproxy state format.
@@ -69,9 +75,11 @@ defmodule AgentCheck do
     "#{state} #{capacity}"
   end
 
+  @doc """
+  Read a single line from the connected socket.
+  """
   def read_line(socket) do
     {:ok, data} = :gen_tcp.recv(socket, 0)
     data
   end
-
 end

@@ -1,36 +1,68 @@
 defmodule AgentCheck.GlobalState do
+  @moduledoc """
+  This Agent persists the gobal state of the appliction that is reported back to HaProxy.
+  """
   use Agent
 
+  @default_capacity 100
+  @capacity_update_interval 10_000
+
   defmodule State do
+    @moduledoc """
+    The struct stat holds the agents' state.
+    """
     defstruct state: "ready",
-              capacity: "100",
+              # @default_capacity,
+              capacity: 100,
               capacity_callback: nil,
               maint_callback: nil
-
   end
 
-  def default_capacity() do
-    "100"
-  end
-
+  @doc "Start the agent and schedule the first capacity update."
   def start_link(capacity_callback, maint_callback) do
-    result = Agent.start_link(fn -> %AgentCheck.GlobalState.State{capacity_callback: capacity_callback, maint_callback: maint_callback} end, name: __MODULE__)
-    :timer.apply_interval(10000, AgentCheck.GlobalState, :update_capacity_loop, [])
-    
-    result
+    if capacity_callback, do: schedule_capacity_update()
+
+    Agent.start_link(
+      fn ->
+        %AgentCheck.GlobalState.State{
+          capacity_callback: capacity_callback,
+          maint_callback: maint_callback
+        }
+      end,
+      name: __MODULE__
+    )
   end
 
   @doc "Update the capacity and reschedule it every 10 seconds"
   def update_capacity_loop() do
-    new_capacity = case get_key(:capacity_callback) do
-      nil -> get_key(:capacity)
-      {module, method} -> apply(module, method, [])
-    end
+    {module, method} = get_key(:capacity)
+    capacity = apply(module, method, [])
+    update_capacity(capacity)
 
-    update_key(:capacity, new_capacity)
-
-    :timer.apply_interval(10000, AgentCheck.GlobalState, :update_capacity_loop, [])
+    schedule_capacity_update()
   end
+
+  def schedule_capacity_update(),
+    do:
+      :timer.apply_interval(
+        @capacity_update_interval,
+        AgentCheck.GlobalState,
+        :update_capacity_loop,
+        []
+      )
+
+  @doc "Update the capacity in the state struct"
+  def update_capacity(new_capacity) when is_binary(new_capacity) do
+    new_capacity
+    |> Integer.parse()
+    |> elem(0)
+    |> update_capacity
+  end
+
+  def update_capacity(new_capacity) when is_number(new_capacity),
+    do: update_key(:capacity, new_capacity)
+
+  def update_capacity(_), do: update_capacity(@default_capacity)
 
   @doc "Set a new state"
   def set_state(new_state) do
@@ -45,24 +77,24 @@ defmodule AgentCheck.GlobalState do
 
   @doc "Call maint callback after 10 seconds"
   def maint() do
+    set_state("maint")
+
     case get_key(:maint_callback) do
       nil -> nil
       {module, method} -> apply(module, method, [])
     end
-
-    set_state("maint")
   end
 
   @doc "Get the entire state struct"
   def get_stats() do
-    Agent.get(__MODULE__, fn (state) -> state end)
+    Agent.get(__MODULE__, fn state -> state end)
   end
 
   defp get_key(key) do
-    Agent.get(__MODULE__, fn (state) -> Map.get(state, key) end)
+    Agent.get(__MODULE__, fn state -> Map.get(state, key) end)
   end
 
   defp update_key(key, value) do
-    Agent.update(__MODULE__, fn (old_state) -> Map.put(old_state, key, value) end)
+    Agent.update(__MODULE__, fn old_state -> Map.put(old_state, key, value) end)
   end
 end
