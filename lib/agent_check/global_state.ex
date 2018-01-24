@@ -77,12 +77,12 @@ defmodule AgentCheck.GlobalState do
 
   @doc "Call maint callback after 10 seconds"
   def maint() do
-    set_state("maint")
-
     case get_key(:maint_callback) do
       nil -> nil
       {module, method} -> apply(module, method, [])
     end
+
+    set_state("maint")
   end
 
   @doc "Get the entire state struct"
