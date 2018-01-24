@@ -35,7 +35,7 @@ defmodule AgentCheck.GlobalState do
 
   @doc "Update the capacity and reschedule it every 10 seconds"
   def update_capacity_loop() do
-    {module, method} = get_key(:capacity)
+    {module, method} = get_key(:capacity_callback)
     capacity = apply(module, method, [])
     update_capacity(capacity)
 
