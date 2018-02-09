@@ -3,6 +3,6 @@ defmodule AgentCheckTest do
   doctest AgentCheck
 
   test "check if the agent starts" do
-    assert AgentCheck.handle_command("state") == "ready 100"
+    assert AgentCheck.handle_command("state") == "ready 100%"
   end
 end

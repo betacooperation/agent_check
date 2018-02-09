@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.8
+
+* Somehow the % sign has gone missing
+
 ## v0.2.7
 
 * Added more documentation.

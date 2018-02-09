@@ -72,7 +72,7 @@ defmodule AgentCheck do
     state = Map.get(stats_struct, :state)
     capacity = Map.get(stats_struct, :capacity)
 
-    "#{state} #{capacity}"
+    "#{state} #{capacity}%"
   end
 
   @doc """
