@@ -11,7 +11,7 @@ by adding `agent_check` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:agent_check, "~> 0.2.7"}
+    {:agent_check, "~> 0.2.8"}
   ]
 end
 
